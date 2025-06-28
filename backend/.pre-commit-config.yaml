@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.8.3  # latest commitizen release :contentReference[oaicite:1]{index=1}
+    hooks:
+      - id: commitizen
+        language_version: "python3.12"
+        stages: ["commit-msg"]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0  # latest recommended version :contentReference[oaicite:2]{index=2}
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.1  # latest release :contentReference[oaicite:3]{index=3}
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: Run mypy
+        entry: mypy
+        exclude: settings.py
+        language: system
+        types: ["python"]
+        require_serial: true
